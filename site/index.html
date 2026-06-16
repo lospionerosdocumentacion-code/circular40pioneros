@@ -196,13 +196,10 @@ main { display: block; }
 
 .hero__stage {
   position: relative; z-index: 3;
-  width: 100%; max-width: var(--maxw);
+  width: 100%; max-width: 760px;
   margin: 0 auto;
   padding: 0 var(--pad-x);
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: clamp(2.5rem, 6vw, 4rem);
-  align-items: center;
+  text-align: center;
 }
 
 /* Bloque intro (texto de bienvenida) */
@@ -269,31 +266,6 @@ main { display: block; }
 }
 .hero__ghost:hover { border-color: var(--gold); color: var(--gold-bright); transform: translateY(-3px); }
 .hero__ghost svg { width: 16px; height: 16px; }
-
-/* Pieza visual del hero — el afiche */
-.hero__visual {
-  position: relative; z-index: 3;
-  width: 100%; max-width: 420px;
-  margin: 0 auto;
-}
-.hero__poster {
-  position: relative;
-  border-radius: 14px; overflow: hidden;
-  border: 1px solid rgba(201,169,97,.4);
-  box-shadow: var(--shadow-deep), 0 0 70px -10px rgba(232,201,122,.25);
-}
-.hero__poster img { width: 100%; display: block; }
-.hero__poster::after {
-  content: ""; position: absolute; inset: 0;
-  background: linear-gradient(180deg, transparent 60%, rgba(7,16,31,.55) 100%);
-  pointer-events: none;
-}
-.hero__poster-corner {
-  position: absolute; width: 26px; height: 26px;
-  border: 2px solid var(--gold); opacity: .7; z-index: 3;
-}
-.hero__poster-corner--tl { top: 12px; left: 12px; border-right: 0; border-bottom: 0; }
-.hero__poster-corner--br { bottom: 12px; right: 12px; border-left: 0; border-top: 0; }
 
 /* Indicador de scroll (estático, sin animación ligada al scroll) */
 .hero__scroll-hint {
@@ -1027,17 +999,6 @@ main { display: block; }
 /* =========================================================
    10 · RESPONSIVE
    ========================================================= */
-@media (min-width: 860px) {
-  .hero__stage {
-    grid-template-columns: 1.05fr .95fr;
-    text-align: left;
-  }
-  .hero__intro { text-align: left; }
-  .hero__eyebrow { justify-content: flex-start; }
-  .hero__sub { margin-left: 0; }
-  .hero__actions { justify-content: flex-start; }
-  .hero__visual { margin: 0; max-width: 460px; }
-}
 @media (min-width: 760px) {
   .offer-grid { grid-template-columns: 1.05fr .95fr; }
   .exp-stage { grid-template-columns: 1fr; }
@@ -1081,7 +1042,7 @@ main { display: block; }
             <em>Dejando Huellas</em>
             <span>Cuarenta años de Los Pioneros</span>
           </h1>
-          <p class="hero__sub">Cuatro décadas de educación con sentido trascendente. Una sola tarde para celebrarlas.</p>
+          <p class="hero__sub">Celebra con nosotros cuatro décadas de educación con sentido trascendente.</p>
           <div class="hero__datechip">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="3" y="4" width="18" height="18" rx="2"></rect><path d="M16 2v4M8 2v4M3 10h18"></path></svg>
             <span><strong>Miércoles 21 de octubre · 2026</strong> — Teatro Pablo Tobón Uribe</span>
@@ -1094,15 +1055,6 @@ main { display: block; }
             <a href="#confirmar" class="hero__ghost">
               Apartar nuestro lugar
             </a>
-          </div>
-        </div>
-
-        <!-- Afiche conmemorativo -->
-        <div class="hero__visual">
-          <div class="hero__poster">
-            <span class="hero__poster-corner hero__poster-corner--tl"></span>
-            <span class="hero__poster-corner hero__poster-corner--br"></span>
-            <img src="assets/portada-obra.webp" alt="Dejando Huellas — 40 años del Centro Educativo Los Pioneros. Construyendo futuro, transformando vidas." width="1080" height="1350">
           </div>
         </div>
       </div>
@@ -1169,8 +1121,8 @@ main { display: block; }
     <div class="section-inner">
       <header class="sec-hd reveal">
         <span class="eyebrow">El Paquete Familiar</span>
-        <h2>Cinco lugares con <em>su apellido</em></h2>
-        <p>Una boleta conmemorativa numerada para tu familia. Elige cómo acompañarnos.</p>
+        <h2>Cinco lugares para <em>cada familia</em></h2>
+        <p>Elige cómo acompañarnos.</p>
         <div class="sec-hd__rule"></div>
       </header>
 
@@ -1187,14 +1139,13 @@ main { display: block; }
           <h3 class="offer-card__name">Paquete Familiar completo</h3>
           <div class="offer-card__price">$250.000<small>Cinco lugares · un solo pago</small></div>
           <ul class="offer-card__list">
-            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"></path></svg><span><strong>5 lugares</strong> con tu apellido y numeración consecutiva</span></li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"></path></svg><span><strong>Cinco lugares juntos</strong> con el apellido de tu familia y numeración consecutiva</span></li>
             <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"></path></svg><span>Boleta conmemorativa <strong>numerada</strong> de la edición 40 años</span></li>
-            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"></path></svg><span>Tu familia <strong>queda en la historia</strong> del proyecto</span></li>
           </ul>
           <div class="offer-card__gift">
             <div class="offer-card__gift-icon">★</div>
             <div class="offer-card__gift-text">
-              Incluye el <strong>Libro Oficial Conmemorativo</strong> — la edición sellada que reúne las historias de Pioneros. Tuyo, sin costo, por confirmar completo.
+              Incluye el <strong>Libro Oficial Conmemorativo</strong> — la edición sellada que reúne las historias de Pioneros, se entrega exclusiva el día de la obra.
             </div>
           </div>
           <div class="offer-card__cta">
@@ -1209,9 +1160,9 @@ main { display: block; }
         <div class="offer-card offer-card--soft reveal reveal-d2">
           <span class="offer-card__tag">Pago en cuotas</span>
           <h3 class="offer-card__name">Paquete Familiar a cuotas</h3>
-          <div class="offer-card__price">3 × $85.000<small>Tres cuotas mensuales</small></div>
+          <div class="offer-card__price">3 × $90.000<small>Tres cuotas mensuales</small></div>
           <ul class="offer-card__list">
-            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"></path></svg><span><strong>5 lugares</strong> con tu apellido, igual de asegurados</span></li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"></path></svg><span>Cinco lugares juntos con el apellido de tu familia y numeración consecutiva</span></li>
             <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"></path></svg><span>Boleta conmemorativa numerada de la edición 40 años</span></li>
           </ul>
           <div class="offer-card__note">
@@ -1224,10 +1175,6 @@ main { display: block; }
           </div>
         </div>
       </div>
-
-      <p class="offer-microcopy reveal reveal-d2">
-        El libro no se vende aparte. Es el gesto con el que la institución agradece a las familias que confirman completo.
-      </p>
     </div>
   </section>
 
@@ -1371,15 +1318,7 @@ main { display: block; }
               ¿Cómo funciona el pago a cuotas?
               <svg class="ch" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"></path></svg>
             </button>
-            <div class="faq-a"><div class="faq-a__in">Son <strong>3 cuotas mensuales de $85.000</strong>. Al confirmar, coordinamos el cronograma por WhatsApp. Tus cinco lugares con tu apellido quedan asegurados desde el primer momento — el Libro Oficial se reserva para quienes pagan completo.</div></div>
-          </div>
-
-          <div class="faq-item">
-            <button class="faq-q" aria-expanded="false">
-              ¿Cómo se confirma el pago?
-              <svg class="ch" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"></path></svg>
-            </button>
-            <div class="faq-a"><div class="faq-a__in">Al completar el formulario te abrimos un chat de WhatsApp con tus datos listos. Desde ahí coordinamos el medio de pago — PSE, tarjeta, Nequi o Bancolombia — y confirmamos tu numeración.</div></div>
+            <div class="faq-a"><div class="faq-a__in">Son <strong>3 cuotas mensuales de $90.000</strong>. Al confirmar, te contactamos por WhatsApp. Tus cinco lugares quedan asegurados desde el primer momento — el Libro Oficial se reserva para quienes pagan completo.</div></div>
           </div>
         </div>
 
