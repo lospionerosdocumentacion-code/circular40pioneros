@@ -19,12 +19,13 @@
    1 · RESET & TOKENS
    ========================================================= */
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-html { -webkit-text-size-adjust: 100%; }
+html { -webkit-text-size-adjust: 100%; -moz-text-size-adjust: 100%; text-size-adjust: 100%; }
 body { -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
-img, svg, picture { display: block; max-width: 100%; }
+img, svg, picture, video { display: block; max-width: 100%; height: auto; }
 button, input, textarea, select { font: inherit; color: inherit; }
 button { cursor: pointer; border: 0; background: none; }
-a { color: inherit; text-decoration: none; }
+a { color: inherit; text-decoration: none; -webkit-tap-highlight-color: transparent; }
+button, a { -webkit-tap-highlight-color: transparent; }
 
 :root {
   --gold:        #C9A961;
@@ -61,7 +62,7 @@ a { color: inherit; text-decoration: none; }
   --ease-out:  cubic-bezier(.16,1,.3,1);
 }
 
-html, body { background: var(--black); color: var(--paper); }
+html, body { background: var(--black); color: var(--paper); width: 100%; overflow-x: hidden; }
 body {
   font-family: var(--font-body);
   font-weight: 300;
@@ -217,9 +218,10 @@ main { display: block; }
 }
 .hero__title {
   font-family: var(--font-display); font-weight: 500;
-  font-size: clamp(2.6rem, 9vw, 5rem);
-  line-height: 1.02; letter-spacing: -.02em;
+  font-size: clamp(2.2rem, 8.5vw, 5rem);
+  line-height: 1.04; letter-spacing: -.02em;
   margin: 1.3rem 0 1rem;
+  overflow-wrap: break-word;
 }
 .hero__title em {
   display: block; font-style: italic;
@@ -245,27 +247,12 @@ main { display: block; }
   border: 1px solid rgba(201,169,97,.32);
   border-radius: 999px; padding: .55rem 1.1rem;
   background: rgba(10,22,40,.5);
+  -webkit-backdrop-filter: blur(4px);
   backdrop-filter: blur(4px);
+  max-width: 100%;
 }
 .hero__datechip strong { font-weight: 600; color: var(--paper); }
-.hero__datechip svg { width: 15px; height: 15px; }
-
-/* Acciones del hero */
-.hero__actions {
-  display: flex; flex-wrap: wrap; gap: .9rem;
-  justify-content: center;
-  margin-top: 2rem;
-}
-.hero__ghost {
-  display: inline-flex; align-items: center; justify-content: center;
-  gap: .55rem;
-  font-weight: 500; font-size: .96rem; color: var(--paper-aged);
-  padding: 1.05rem 1.8rem; border-radius: 999px;
-  border: 1px solid rgba(201,169,97,.32);
-  transition: border-color .3s var(--ease-soft), color .3s var(--ease-soft), transform .3s var(--ease-soft);
-}
-.hero__ghost:hover { border-color: var(--gold); color: var(--gold-bright); transform: translateY(-3px); }
-.hero__ghost svg { width: 16px; height: 16px; }
+.hero__datechip svg { width: 15px; height: 15px; flex: 0 0 15px; }
 
 /* Indicador de scroll (estático, sin animación ligada al scroll) */
 .hero__scroll-hint {
@@ -417,6 +404,8 @@ main { display: block; }
 }
 .offer-card__badge {
   position: absolute; top: -13px; left: clamp(1.6rem,4vw,2.3rem);
+  right: clamp(1.6rem,4vw,2.3rem);
+  width: max-content; max-width: calc(100% - 3.2rem);
   font-size: .66rem; font-weight: 700; letter-spacing: .14em;
   text-transform: uppercase; color: var(--black);
   background: linear-gradient(135deg, var(--gold-bright), var(--gold));
@@ -997,11 +986,26 @@ main { display: block; }
 .sticky-cta .btn-gold { width: 100%; max-width: 480px; padding: .95rem 1.6rem; }
 
 /* =========================================================
-   10 · RESPONSIVE
+   10 · RESPONSIVE — móvil primero, consistente en todo equipo
    ========================================================= */
+
+/* Teléfonos muy pequeños (iPhone SE, Android compactos) */
+@media (max-width: 400px) {
+  .carta__signatures,
+  .footer__sign { grid-template-columns: 1fr; gap: 1rem; }
+  .footer__logos { gap: 1rem; }
+  .hero__datechip { font-size: .74rem; }
+}
+
+/* Pantallas apaisadas y bajas (teléfono horizontal): el hero no debe
+   forzar 100vh ni encimar el indicador con el texto */
+@media (max-height: 600px) and (orientation: landscape) {
+  .hero__sticky { min-height: auto; padding: clamp(3.5rem,12vh,5rem) 0; }
+  .hero__scroll-hint { display: none; }
+}
+
+/* Tablet / escritorio: la obra y el libro pasan a dos columnas */
 @media (min-width: 760px) {
-  .offer-grid { grid-template-columns: 1.05fr .95fr; }
-  .exp-stage { grid-template-columns: 1fr; }
   .exp-piece--obra, .exp-piece--libro {
     display: grid; grid-template-columns: 1fr 1fr;
     gap: clamp(1.5rem, 4vw, 3rem); align-items: center;
@@ -1012,6 +1016,14 @@ main { display: block; }
   .exp-piece__lead, .exp-piece__text, .exp-piece__quote { margin-left: 0; }
   .sticky-cta { display: none; }
 }
+
+/* Las dos tarjetas de precio solo se ponen lado a lado cuando hay
+   espacio real para que no queden apretadas en teléfonos grandes */
+@media (min-width: 920px) {
+  .offer-grid { grid-template-columns: 1.05fr .95fr; align-items: start; }
+}
+
+/* Respeta a quienes prefieren menos movimiento */
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {
     animation-duration: .001ms !important;
@@ -1047,15 +1059,6 @@ main { display: block; }
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="3" y="4" width="18" height="18" rx="2"></rect><path d="M16 2v4M8 2v4M3 10h18"></path></svg>
             <span><strong>Miércoles 21 de octubre · 2026</strong> — Teatro Pablo Tobón Uribe</span>
           </div>
-          <div class="hero__actions">
-            <a href="#carta" class="btn-gold">
-              Leer la carta
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 5l7 7-7 7"></path></svg>
-            </a>
-            <a href="#confirmar" class="hero__ghost">
-              Apartar nuestro lugar
-            </a>
-          </div>
         </div>
       </div>
 
@@ -1089,10 +1092,6 @@ main { display: block; }
             Esta tarde es <em>nuestra</em> — la de las familias que hemos caminado con Pioneros.<br>
             Aparta el lugar de tu familia y celebremos juntos esta historia.
           </p>
-          <a href="#confirmar" class="btn-gold">
-            Quiero apartar el lugar de mi familia
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 5l7 7-7 7"></path></svg>
-          </a>
           <p class="carta__sign">
             Centro Educativo Los Pioneros · 40 años<br>
             <span>Construyendo futuros, transformando vidas</span>
@@ -1231,7 +1230,7 @@ main { display: block; }
           </div>
           <div class="exp-piece__body">
             <h3 class="exp-piece__title">El Libro Oficial Conmemorativo</h3>
-            <p class="exp-piece__lead">Una edición numerada y sellada. No se reimprime.</p>
+            <p class="exp-piece__lead">Una edición numerada y sellada.</p>
             <p class="exp-piece__text">Reúne las historias de las familias, los maestros y los exalumnos que han dado identidad y sentido a Pioneros. El objeto donde queda escrito que tu familia fue parte de esto — y se entrega en mano, esa misma tarde, en el teatro.</p>
             <p class="exp-piece__quote">Su legado sigue creciendo en cada niño y en cada aula.</p>
           </div>
