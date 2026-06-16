@@ -1,0 +1,8 @@
+live-index.html
+user-latest.html
+user-final.html
+.netlify/
+node_modules/
+package.json
+package-lock.json
+shot*.js
